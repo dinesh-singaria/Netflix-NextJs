@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MovieDetails from "./MovieDetails";
 
 const Hero = ({ moviePosters }) => {
@@ -8,6 +8,7 @@ const Hero = ({ moviePosters }) => {
 
   useEffect(() => {
     const mov = moviePosters[Math.floor(Math.random() * moviePosters.length)];
+
     fetch(
       `https://api.themoviedb.org/3/movie/${mov.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&append_to_response=videos`
     )
@@ -25,9 +26,11 @@ const Hero = ({ moviePosters }) => {
 
     setMovie(mov);
   }, [moviePosters]);
+
   return (
     <div>
       <MovieDetails
+      
         movie={movie}
         showPlayer={showPlayer}
         setShowPlayer={setShowPlayer}

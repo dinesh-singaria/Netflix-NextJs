@@ -2,7 +2,6 @@ import React from "react";
 import Navbar from "./Navbar";
 import Image from "next/image";
 import { baseUrl } from "@/utils/constant";
-
 import { IoIosInformationCircle } from "react-icons/io";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
@@ -11,11 +10,10 @@ import dynamic from "next/dynamic";
 const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
 
 const MovieDetails = ({ movie, showPlayer, setShowPlayer, trailerURL }) => {
-  console.log(movie);
   return (
     <>
       <Navbar />
-      <div className="container ">
+      <div className="pl-[2.5rem]">
         <div className="flex flex-col space-y-2 py-16 md:space-y-4 h-[100vh] justify-center lg:pb-12">
           <div className="absolute top-0 left-0 -z-10 h-screen w-screen">
             <Image

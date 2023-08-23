@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
 import Image from "next/image";
@@ -8,9 +8,27 @@ import { BiSearch } from "react-icons/bi";
 import { BsBellFill } from "react-icons/bs";
 
 const Navbar = () => {
+  const [navSize, setnavSize] = useState("10rem");
+  const [navColor, setnavColor] = useState("transparent");
+  const listenScrollEvent = () => {
+    window.scrollY > 10 ? setnavColor("black") : setnavColor("transparent");
+    window.scrollY > 10 ? setnavSize("5rem") : setnavSize("10rem");
+  };
+  useEffect(() => {
+    window.addEventListener("scroll", listenScrollEvent);
+    return () => {
+      window.removeEventListener("scroll", listenScrollEvent);
+    };
+  }, []);
   return (
-    <nav>
-      <div className="container bg-color-black flex justify-between">
+    <nav
+      style={{
+        backgroundColor: navColor,
+        height: navSize,
+        transition: "all 0.75s",
+      }}
+    >
+      <div className="bg-color-black flex justify-between">
         <div className="flex items-center space-x-2 md:space-x-10">
           <Link className="" href="/">
             <Logo style="h-auto w-[100px]" />
@@ -27,8 +45,8 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex items-center space-x-4 text-sm font-light">
-          <BiSearch className="sm hidden h-6 w-6 sm:inline" />
-          <p className="hidden lg:inline">Kids</p>
+          <BiSearch className="sm hidden h-7 w-7 sm:inline" />
+          <p className="hidden lg:inline ">Kids</p>
           <BsBellFill className="h-6 w-6" />
 
           <Image
@@ -36,7 +54,7 @@ const Navbar = () => {
             alt="dp"
             width={60}
             height={60}
-            className="cursor-pointer rounded w-auto h-auto"
+            className="cursor-pointer rounded w-auto h-auto w-9 "
             onClick={() => signOut()}
           />
         </div>

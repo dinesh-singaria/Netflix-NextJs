@@ -4,6 +4,7 @@ import Login from "@/components/Login";
 import Navbar from "@/components/Navbar";
 import requests from "@/utils/requests";
 import Hero from "@/components/Hero";
+import Row from "@/components/Row";
 
 export default function Home({
   moviePosters,
@@ -16,7 +17,9 @@ export default function Home({
   documentaries,
 }) {
   const { data: session } = useSession();
+
   if (!session) return <Login />;
+
   return (
     <>
       <Head>
@@ -25,8 +28,19 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className="relative bg-gradient-to-b from-gray-900/10 to-[#010511]">
-        <Hero moviePosters={moviePosters} />
+        <Hero moviePosters={moviePosters}  />
+
+        <section className="pb-32">
+          <Row title="Trending Now" movies={trendingNow} />
+          <Row title="Top Rated" movies={topRated} />
+          <Row title="Action Thrillers" movies={actionMovies} />
+          <Row title="Comedies" movies={comedyMovies} />
+          <Row title="Scary Movies" movies={horrorMovies} />
+          <Row title="Romance Movies" movies={romanceMovies} />
+          <Row title="Documentaries" movies={documentaries} />
+        </section>
       </main>
     </>
   );
@@ -54,6 +68,7 @@ export async function getServerSideProps(context) {
     fetch(requests.fetchRomanceMovies).then((res) => res.json()),
     fetch(requests.fetchDocumentaries).then((res) => res.json()),
   ]);
+
   return {
     props: {
       session,
