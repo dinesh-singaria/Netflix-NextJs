@@ -28,7 +28,7 @@ const Navbar = () => {
         transition: "all 0.75s",
       }}
     >
-      <div className="bg-color-black flex justify-between">
+      <div className="bg-color-black flex justify-between ">
         <div className="flex items-center space-x-2 md:space-x-10">
           <Link className="" href="/">
             <Logo style="h-auto w-[100px]" />
